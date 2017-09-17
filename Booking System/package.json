@@ -1,0 +1,12 @@
+{
+	"name": "jbn-booking",
+	"description": "A dynamic booking system with multiple storage type.",
+	"version": "0.0.1",
+	"dependencies":{
+      	"jbs-simple-console-logger":{
+        	"version": "1.0.32",
+        	"resolved": "https://registry.npmjs.org/jbs-simple-console-logger/-/jbs-simple-console-logger-1.0.32.tgz",
+			"integrity": "sha1-1gmN7cqinXL4q/8ICrksOVk+/3U="
+    	}
+    }
+}
