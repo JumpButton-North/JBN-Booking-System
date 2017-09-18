@@ -5,7 +5,7 @@
  * @Project: Booking System
  * @Filename: booking-system.js
  * @Last modified by:   matthew
- * @Last modified time: Sunday, September 17th 2017, 2:20:09 AM
+ * @Last modified time: Sunday, September 17th 2017, 8:14:21 PM
  * @Copyright: 2017 JumpButton North
  */
 
@@ -16,7 +16,7 @@ let pjson = require("./package.json");
 let version = pjson.version;
 
 function BookingSystem(){
-	
+
 }
 log.info("Booking System Loading...");
 
@@ -24,5 +24,9 @@ log.info("Booking System Loading...");
 module.exports = function(app){
 	app.get("/booking/jbnbook.js",function(req,res){
 		res.sendFile(__dirname + "/booking-system-client.js");
+	});
+
+	app.get("/booking/jbnstyle.css",function(req,res){
+		res.sendFile(__dirname + "/booking-style.css");
 	});
 };

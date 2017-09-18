@@ -1,0 +1,56 @@
+/**
+ * @Author: Matthew Auld <matthew>
+ * @Date:   Sunday, September 17th 2017, 8:02:50 PM
+ * @Email:  matthew@jumpbuttonstudio.com
+ * @Project: Booking System
+ * @Filename: booking-style.css
+ * @Last modified by:   matthew
+ * @Last modified time: Sunday, September 17th 2017, 8:30:07 PM
+ * @Copyright: 2017 JumpButton North
+ */
+
+#jbn_booking_system{
+	background-color:#FFFFFF;
+	border-radius:10px;
+	overflow:hidden;
+	padding-top:15px;
+	-webkit-box-shadow: 0 2px 10px 0 rgba(0,0,0,0.5);
+	box-shadow: 0 2px 10px 0 rgba(0,0,0,0.5);
+}
+
+#jbn_booking_system .month-name > h1{
+	font-size:21px;
+}
+
+#jbn_booking_system .calendar_navigation{
+	padding:15px;
+}
+
+#jbn_booking_system .week-names{
+	font-size:14px;
+}
+
+#jbn_booking_system .week-names .col-md-1{
+	padding-top:15px;
+	padding-bottom:15px;
+	font-weight:bold;
+}
+
+@media (min-width:768px){
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1{
+		width: 100%;
+		max-width: 100%;
+	}
+}
+
+@media (min-width:992px){
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
+		width: 14.285714285714285714285714285714%;
+		max-width: 14.285714285714285714285714285714%;
+		flex:0 0 14.3%;
+ 	}
+}

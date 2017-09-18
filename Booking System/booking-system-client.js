@@ -5,7 +5,7 @@
  * @Project: Booking System
  * @Filename: booking-system-client.js
  * @Last modified by:   matthew
- * @Last modified time: Sunday, September 17th 2017, 4:08:04 AM
+ * @Last modified time: Sunday, September 17th 2017, 8:24:52 PM
  * @Copyright: 2017 JumpButton North
  */
 
@@ -21,11 +21,16 @@ if(!window.jQuery){
 			// BO = Booking Options
 			let bo = {
 			 	name: "Booking System",
-				container: "#jbn_booking"
+				container: "#jbn_booking",
+				primary_color: "#664898",
 			};
 			if(co){
 				bo.name = co.hasOwnProperty("name") ? co.name : bo.name;
+				bo.primary_color = co.hasOwnProperty("primary_color") ? co.primary_color : bo.primary_color;
 			}
+
+
+
 			booking_system = undefined;
 			$(document).ready(function(){
 				booking_system = new BookingSystem(bo);
@@ -42,15 +47,36 @@ function BookingSystem(options){
 
 	this.name = options.name;
 	this.container = options.container;
+	this.bg_color = options.primary_color;
+
+	this.getPrimaryForeground = function(c){
+		var c = c.substring(1);      // strip #
+		var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+		var r = (rgb >> 16) & 0xff;  // extract red
+		var g = (rgb >>  8) & 0xff;  // extract green
+		var b = (rgb >>  0) & 0xff;  // extract blue
+		var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+		if(luma < 90)
+		    return "#FFFFFF";
+		return "#000000";
+	};
+
 
 	this.generateCSS = function(){
-		console.log("Generating Dynamic CSS");
 		let css = "<style type=\"text/css\" id=\"calendar_styles\"></style>";
 		if($(this.container + " > style").length === 0){
+			$(this.container).append("<link rel=\"stylesheet\" type=\"text/css\" href=\"/booking/jbnstyle.css\">");
 			$(this.container).append(css);
 			this.generateCSS();
 		}else{
-			css = "#jbn_booking_system .month-name > h1{ font-size:16px; }";
+			css  = "#jbn_booking_system .week-names .col-md-1{";
+			css += "	background-color:" + this.bg_color + ";";
+			css += "	color:" + this.getPrimaryForeground(this.bg_color); + ";";
+			css += "}";
+			css += "#jbn_booking_system .calendar_navigation .btn{";
+			css += "	background-color:" + this.bg_color + ";";
+			css += "	color:" + this.getPrimaryForeground(this.bg_color) + ";";
+			css += "}";
 			$(this.container + " > style").html(css);
 		}
 		return css;
@@ -77,13 +103,15 @@ BookingSystem.prototype.checkForBootstrap = function(){
 
 BookingSystem.prototype.render = function(){
 	if($(this.container + " > div#jbn_booking_system").length === 0){
+		$(this.container).html("");
+		this.generateCSS();
 		let html = "<div id=\"jbn_booking_system\">";
 		html += "<div class=\"row\">";
 		html += "<div class=\"col-md-12 text-center month-name\">";
 		html += "<h1><i class=\"fa fa-spin fa-spinner\"></i> Loading Calendar...</h1>";
 		html += "</div>";
 		html += "</div>";
-		html += "<div class=\"row\">";
+		html += "<div class=\"row calendar_navigation\">";
 		html += "<div class=\"col-md-6\">";
 		html += "<div class=\"btn-group\" role=\"group\">";
 		html += "<button type=\"button\" class=\"btn btn-sm\">Day</button>";
@@ -99,20 +127,20 @@ BookingSystem.prototype.render = function(){
 		html += "<button type=\"button\" class=\"btn btn-sm\">Today</button>";
 		html += "</div>";
 		html += "</div>";
-		html += "<div class=\"row\">";
-		html += "<div class=\"col-1 text-center\">Sunday</div>";
-		html += "<div class=\"col-2 text-center\">Monday</div>";
-		html += "<div class=\"col-2 text-center\">Tuesday</div>";
-		html += "<div class=\"col-2 text-center\">Wednesday</div>";
-		html += "<div class=\"col-2 text-center\">Thursday</div>";
-		html += "<div class=\"col-2 text-center\">Friday</div>";
-		html += "<div class=\"col-1 text-center\">Saturday</div>";
+		html += "<div class=\"row seven-cols week-names\">";
+		html += "<div class=\"col-md-1 text-center\">Sunday</div>";
+		html += "<div class=\"col-md-1 text-center\">Monday</div>";
+		html += "<div class=\"col-md-1 text-center\">Tuesday</div>";
+		html += "<div class=\"col-md-1 text-center\">Wednesday</div>";
+		html += "<div class=\"col-md-1 text-center\">Thursday</div>";
+		html += "<div class=\"col-md-1 text-center\">Friday</div>";
+		html += "<div class=\"col-md-1 text-center\">Saturday</div>";
 		html += "</div>";
 		html += "</div>";
-		$(this.container).html(html);
-		this.generateCSS();
+		$(this.container).append(html);
 		this.render();
 	}else{
 
+		console.log("Booking System Ready.");
 	}
 };
