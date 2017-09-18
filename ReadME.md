@@ -24,4 +24,4 @@ JBNBookingSystem({
 
 The above code will output the image below:
 
-![](https://i.imgur.com/t7wRgNm.png Output)
+![output](https://i.imgur.com/t7wRgNm.png "Output")
