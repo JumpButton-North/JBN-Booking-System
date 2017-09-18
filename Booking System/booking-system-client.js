@@ -5,7 +5,7 @@
  * @Project: Booking System
  * @Filename: booking-system-client.js
  * @Last modified by:   matthew
- * @Last modified time: Monday, September 18th 2017, 1:20:59 PM
+ * @Last modified time: Monday, September 18th 2017, 1:33:02 PM
  * @Copyright: 2017 JumpButton North
  */
 
@@ -28,6 +28,7 @@ if(!window.jQuery){
 			};
 			if(co){
 				bo.name = co.hasOwnProperty("name") ? co.name : bo.name;
+				bo.container = co.hasOwnProperty("container") ? co.container : bo.container;
 				bo.primary_color = co.hasOwnProperty("primary_color") ? co.primary_color : bo.primary_color;
 				bo.full_month_name = co.hasOwnProperty("full_month_name") ? co.full_month_name : bo.full_month_name;
 			}
